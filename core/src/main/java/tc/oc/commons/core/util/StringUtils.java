@@ -4,6 +4,28 @@ import java.util.Collection;
 import java.util.Date;
 
 public class StringUtils {
+    
+    /** Repeat character 'c' n times. */
+    public static String repeat(String c, int n) {
+        assert n >= 0;
+        return new String(new char[n]).replace("\0", c);
+    }
+    
+  /**
+   * Pad message message using dashes
+   * 
+   * @param String message Message to pad
+   * @param String c character to pad message with
+   * @param ChatColor dashColor Color of dashes
+   * @param ChatColor messageColor Color of message
+   * @return String padded message
+   */
+    public static String padMessage(String message, String c, ChatColor dashColor, ChatColor messageColor) {
+        message = " " + message + " ";
+        String dashes = StringUtils.repeat(c, (ChatPaginator.GUARANTEED_NO_WRAP_CHAT_PAGE_WIDTH - ChatColor.stripColor(message).length() - 2) / (c.length() * 2));
+        return dashColor + dashes + ChatColor.RESET + messageColor + message + ChatColor.RESET + dashColor + dashes;
+    }
+    
     /**
      * Shorthand for listToEnglishCompound(list, "", "").
      *
